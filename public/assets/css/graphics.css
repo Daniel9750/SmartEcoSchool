@@ -1,0 +1,56 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "Google Sans", sans-serif;
+    font-weight: normal;
+    font-size: 1rem;
+    background-color: #fafafa;
+}
+
+input {
+    padding: 0.75rem;
+    border: 0;
+    border-radius: 2.5rem;
+    box-shadow: 0 0.2rem 0.4rem rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    background-color: #0b373f;
+    color: #FAFAFA;
+    font-weight: bold;
+}
+
+main {
+    width: 95%;
+    margin: 1rem auto 0 auto;
+    height: 90vh;
+    display: flex;
+    justify-content: center;
+}
+
+table {
+    width: 90%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+}
+
+thead {
+    background-color: #86D3D3;
+    border: 0.15rem solid #86D3D3;
+    color: #0b373f;
+}
+
+th {
+    padding: 10px;
+}
+
+tbody tr {
+    background-color: #D7EEEE;
+}
+
+td {
+    padding: 0.5rem;
+    border: 0.15rem solid #86D3D3;
+}
+
+td:first-child {
+    font-weight: bold;
+}

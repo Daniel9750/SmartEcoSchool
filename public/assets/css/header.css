@@ -1,0 +1,51 @@
+header {
+    background: linear-gradient(#002c5355, #002c5350, #002c5345);
+    display: flex;
+    position: sticky;
+    top: 0rem;
+    z-index: 10;
+    padding: 0.5rem;
+}
+
+img {
+    max-width: 2.5rem;
+}
+
+h1 {
+    margin: 0;
+    padding: 0;
+    color: #0b373f;
+}
+
+#institution,
+#control-panel {
+    width: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+nav {
+    width: 80%;
+}
+
+nav > ul > li > a {
+    text-decoration: none;
+}
+
+ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    margin: 0;
+}
+
+#disconnect {
+    margin: 0;
+}
+
+a {
+    text-decoration: none;
+}

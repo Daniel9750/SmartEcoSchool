@@ -6,22 +6,11 @@
     <link rel="stylesheet" href="{{ asset('assets/css/graphics.css') }}" />
 @endsection
 
-@section('disconnect')
-    @include('components.disconnect')
-@endsection
-
 @section('content')
-
-    <!-- Muestra el valor de la clave success que está almacenado en una sesión flash -->
-    @if (session('success'))
-        <script>
-            alert("{{ session('success') }}");
-        </script>
-    @endif
 
     <main>
 
-        <!-- Contenedor que renderiza el gráfico y permite modificar la resolución del gráfico -->
+        <!-- Container that renders the graph and allows modifying the resolution of the graph -->
         <canvas id="myChart" width="350" height="150"></canvas>
 
         <script>
@@ -38,7 +27,7 @@
 
                 var ctx = document.getElementById('myChart').getContext('2d');
                 var myChart = new Chart(ctx, {
-                    type: 'line',
+                    type: 'bar',
                     data: {
                         labels: labels,
                         datasets: [{
@@ -64,18 +53,16 @@
     </main>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() 
-        {
-            setInterval(function() 
-                {
-                    // Redireccionar a la vista deseada.
+        document.addEventListener('DOMContentLoaded', function() {
+            setInterval(function() {
+                    // Redirect to the desired view.
                     window.location.href = '{{ route('graphics.table') }}';
-                }, 
-            60000); // Intervalo de 10 segundos (60000 milisegundos).
+                },
+                60000); // 10 second interval (60000 milliseconds).
         });
     </script>
 
-    <!-- Carga la biblioteca gratuita Chart.js desde la red mediante un Content Delivery Network -->
+    <!-- Load the free Chart.js library from the network using a Content Delivery Network -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 @endsection

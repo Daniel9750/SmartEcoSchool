@@ -2,17 +2,11 @@
 
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
+// Import the graphics driver so that streams can execute data serialization functions.
+use App\Http\Controllers\SensorMeasurementController;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Graph views.
+Route::get('/graphics/line', [SensorMeasurementController::class,'line' ])->name('graphics.bar');
+Route::get('/graphics/bar' , [SensorMeasurementController::class,'bar'  ])->name('graphics.bar');
+Route::get('/graphics/bar' , [SensorMeasurementController::class,'bar'  ])->name('graphics.bar');
+Route::get('/graphics/bar' , [SensorMeasurementController::class,'bar'  ])->name('graphics.bar');

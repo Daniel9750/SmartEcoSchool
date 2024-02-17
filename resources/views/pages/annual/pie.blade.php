@@ -27,7 +27,7 @@
 
                 var ctx = document.getElementById('myChart').getContext('2d');
                 var myChart = new Chart(ctx, {
-                    type: 'bar',
+                    type: 'pie',
                     data: {
                         labels: labels,
                         datasets: [{
@@ -56,7 +56,7 @@
         document.addEventListener('DOMContentLoaded', function() {
             setInterval(function() {
                     // Redirect to the desired view.
-                    window.location.href = '{{ route('graphics.table') }}';
+                    window.location.href = '{{ route('pages.annual.radar') }}';
                 },
                 60000); // 10 second interval (60000 milliseconds).
         });

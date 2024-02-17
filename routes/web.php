@@ -1,14 +1,15 @@
 <?php
 
+// Dependency for routes to do their job.
 use Illuminate\Support\Facades\Route;
 
 // Import the graphics driver so that streams can execute data serialization functions.
 use App\Http\Controllers\SensorMeasurementController;
 
-// Monthly charts.
-Route::get('/graphics/bar' , [SensorMeasurementController::class,'bar'  ])->name('graphics.bar');
-Route::get('/graphics/line', [SensorMeasurementController::class,'line' ])->name('graphics.bar');
+// Annual charts.
+Route::get('/agua/anual'          , [SensorMeasurementController::class,'pie'  ])->name('pages.annual.pie'  );
+Route::get('/electricidad/anual'  , [SensorMeasurementController::class,'radar'])->name('pages.annual.radar');
 
-// Annual graphs.
-Route::get('/graphics/bar' , [SensorMeasurementController::class,'bar'  ])->name('graphics.bar');
-Route::get('/graphics/bar' , [SensorMeasurementController::class,'bar'  ])->name('graphics.bar');
+// Monthly graphs.
+Route::get('/agua/mensual'        , [SensorMeasurementController::class,'bar'  ])->name('pages.monthly.bar' );
+Route::get('/electricidad/mensual', [SensorMeasurementController::class,'bar'  ])->name('pages.monthly.line');

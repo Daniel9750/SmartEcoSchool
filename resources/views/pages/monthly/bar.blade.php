@@ -56,7 +56,7 @@
         document.addEventListener('DOMContentLoaded', function() {
             setInterval(function() {
                     // Redirect to the desired view.
-                    window.location.href = '{{ route('graphics.table') }}';
+                    window.location.href = '{{ route('pages.monthly.line') }}';
                 },
                 60000); // 10 second interval (60000 milliseconds).
         });

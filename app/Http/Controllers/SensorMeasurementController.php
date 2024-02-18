@@ -64,17 +64,25 @@ class SensorMeasurementController extends Controller
      */
     public function bar()
     {
-        $resultados = Measurement::select('id_sensor', 'consumo', DB::raw('YEAR(fecha) as fecha'))
-            ->whereIn('id_sensor', [2])
+        $resultados = Measurement::select('id_sensor', DB::raw('MAX(consumo) as consumo_total'), DB::raw('YEAR(fecha) as year'), DB::raw('MONTH(fecha) as month'))
             ->whereIn('fecha', function ($query) {
-                $query->selectRaw('MAX(fecha)')
+                $query->select(DB::raw('MAX(fecha)'))
                     ->from('measurements')
-                    ->where('id_sensor', 2)
-                    ->groupBy(DB::raw('YEAR(fecha)'));
+                    ->whereRaw('id_sensor = measurements.id_sensor')
+                    ->groupBy(DB::raw('YEAR(fecha), MONTH(fecha)'));
             })
-            ->orderByDesc('fecha')
+            ->where('id_sensor', 2)
+            ->groupBy('id_sensor', DB::raw('YEAR(fecha)'), DB::raw('MONTH(fecha)'))
+            ->orderByDesc('year')
+            ->orderByDesc('month')
             ->get();
-
+    
+        // Filter only results from the last year stored.
+        $lastYear = $resultados->max('year');
+        $resultados = $resultados->filter(function ($item) use ($lastYear) {
+            return $item->year == $lastYear;
+        });
+    
         return view('pages.monthly.bar', compact('resultados'));
     }
 
@@ -85,17 +93,25 @@ class SensorMeasurementController extends Controller
      */
     public function line()
     {
-        $resultados = Measurement::select('id_sensor', 'consumo', DB::raw('CONCAT(YEAR(fecha), "-", LPAD(MONTH(fecha), 2, "0")) as fecha'))
-            ->whereIn('id_sensor', [1])
+        $resultados = Measurement::select('id_sensor', DB::raw('MAX(consumo) as consumo_total'), DB::raw('YEAR(fecha) as year'), DB::raw('MONTH(fecha) as month'))
             ->whereIn('fecha', function ($query) {
-                $query->selectRaw('MAX(fecha)')
+                $query->select(DB::raw('MAX(fecha)'))
                     ->from('measurements')
-                    ->where('id_sensor', 1)
+                    ->whereRaw('id_sensor = measurements.id_sensor')
                     ->groupBy(DB::raw('YEAR(fecha), MONTH(fecha)'));
             })
-            ->orderByDesc('fecha')
+            ->where('id_sensor', 1)
+            ->groupBy('id_sensor', DB::raw('YEAR(fecha)'), DB::raw('MONTH(fecha)'))
+            ->orderByDesc('year')
+            ->orderByDesc('month')
             ->get();
-
-        return view('pages.monthly.line', compact('resultados'));
+    
+        // Filter only results from the last year stored.
+        $lastYear = $resultados->max('year');
+        $resultados = $resultados->filter(function ($item) use ($lastYear) {
+            return $item->year == $lastYear;
+        });
+    
+        return view('pages.monthly.bar', compact('resultados'));
     }
 }

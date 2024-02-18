@@ -12,4 +12,4 @@ Route::get('/electricidad/anual'  , [SensorMeasurementController::class,'radar']
 
 // Monthly graphs.
 Route::get('/agua/mensual'        , [SensorMeasurementController::class,'bar'  ])->name('pages.monthly.bar' );
-Route::get('/electricidad/mensual', [SensorMeasurementController::class,'bar'  ])->name('pages.monthly.line');
+Route::get('/electricidad/mensual', [SensorMeasurementController::class,'line' ])->name('pages.monthly.line');

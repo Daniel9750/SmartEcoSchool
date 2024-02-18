@@ -1,6 +1,6 @@
 <header>
     <div id="institution">
-        <h1>SmartEcoSchool</h1>
+        <h1>Smart<span>Eco</span>School</h1>
     </div>
     <nav>
         <ul>

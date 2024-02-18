@@ -2,7 +2,7 @@
 @extends('layouts.base')
 
 <!-- Sets the page title -->
-@section('title', 'Bienvenido a SmartEcoSchool')
+@section('title', 'Consumo de agua mensual')
 
 <!-- Includes a CSS file -->
 @section('css')
@@ -24,8 +24,18 @@
 
                 // Mapear los meses.
                 var months = {
-                    1: 'Ene', 2: 'Feb', 3: 'Mar', 4: 'Abr', 5: 'May', 6: 'Jun',
-                    7: 'Jul', 8: 'Ago', 9: 'Sep', 10: 'Oct', 11: 'Nov', 12: 'Dic'
+                    1: 'Ene',
+                    2: 'Feb',
+                    3: 'Mar',
+                    4: 'Abr',
+                    5: 'May',
+                    6: 'Jun',
+                    7: 'Jul',
+                    8: 'Ago',
+                    9: 'Sep',
+                    10: 'Oct',
+                    11: 'Nov',
+                    12: 'Dic'
                 };
 
                 var labels = sensorMeasurements.map(function(measurement) {
@@ -33,7 +43,8 @@
                 });
 
                 var values = sensorMeasurements.map(function(measurement) {
-                    return measurement.consumo; 
+                    return measurement
+                        .consumo_total;
                 });
 
                 var ctxBar = document.getElementById('myBarChart').getContext('2d');
@@ -42,7 +53,7 @@
                     data: {
                         labels: labels,
                         datasets: [{
-                            label: 'Valor de Medición',
+                            label: 'Valores de las Mediciones',
                             data: values,
                             backgroundColor: 'rgba(75, 192, 192, 0.2)',
                             borderColor: 'rgba(75, 192, 192, 1)',
@@ -53,7 +64,7 @@
                         scales: {
                             y: {
                                 beginAtZero: true,
-                                max: 100
+                                max: 100000000
                             }
                         }
                     }

@@ -1,40 +1,63 @@
+<!-- Extends the base layout -->
 @extends('layouts.base')
 
-@section('title', 'Bienvenido a SmartEcoSchool')
+<!-- Sets the page title -->
+@section('title', 'Consumo de agua mensual')
 
+<!-- Includes a CSS file -->
 @section('css')
     <link rel="stylesheet" href="{{ asset('assets/css/graphics.css') }}" />
 @endsection
 
+<!-- Content section of the page -->
 @section('content')
 
+    <!-- Main content container -->
     <main>
 
-        <!-- Container that renders the graph and allows modifying the resolution of the graph -->
-        <canvas id="myChart" width="550" height="250"></canvas>
+        <!-- Container that renders the bar graph -->
+        <canvas id="myBarChart" width="550" height="250"></canvas>
 
         <script>
             document.addEventListener('DOMContentLoaded', function() {
                 var sensorMeasurements = @json($resultados);
-                
+
+                // Mapear los meses.
+                var months = {
+                    1: 'Ene',
+                    2: 'Feb',
+                    3: 'Mar',
+                    4: 'Abr',
+                    5: 'May',
+                    6: 'Jun',
+                    7: 'Jul',
+                    8: 'Ago',
+                    9: 'Sep',
+                    10: 'Oct',
+                    11: 'Nov',
+                    12: 'Dic'
+                };
+
                 var labels = sensorMeasurements.map(function(measurement) {
-                    return measurement.fecha;
+                    return months[measurement.month] + ' ' + measurement.year;
                 });
 
                 var values = sensorMeasurements.map(function(measurement) {
-                    return measurement.consumo; 
+                    return measurement
+                        .consumo_total; // Ajusta la propiedad según la estructura real de tus datos
                 });
 
-                var ctx = document.getElementById('myChart').getContext('2d');
-                var myChart = new Chart(ctx, {
+                var ctxBar = document.getElementById('myBarChart').getContext('2d');
+                var myBarChart = new Chart(ctxBar, {
                     type: 'line',
                     data: {
                         labels: labels,
+                        responsive: true,
                         datasets: [{
-                            label: 'Valor de Medición',
+                            label: 'Valores de las Mediciones',
                             data: values,
                             backgroundColor: 'rgba(255, 255, 0, 0.2)',
-                            borderColor: 'rgba(218, 165, 32, 1)',
+                            borderColor: 'rgba(255, 206, 86, 1)',
                             borderWidth: 1
                         }]
                     },
@@ -42,7 +65,7 @@
                         scales: {
                             y: {
                                 beginAtZero: true,
-                                max: 100
+                                max: 100000000
                             }
                         }
                     }
@@ -53,15 +76,15 @@
     </main>
 
     <script>
-        // To debug code.
+        // To debug code, log JSON data to the console.
         console.log(@json($resultados));
 
         document.addEventListener('DOMContentLoaded', function() {
             setInterval(function() {
                     // Redirect to the desired view.
-                    window.location.href = '{{ route('pages.annual.polarArea') }}';
+                    window.location.href = '{{ route('pages.monthly.line') }}';
                 },
-                60000); // 10 second interval (60000 milliseconds).
+                60000); // 60-second interval (60000 milliseconds).
         });
     </script>
 

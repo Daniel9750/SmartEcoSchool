@@ -2,7 +2,7 @@
 @extends('layouts.base')
 
 <!-- Sets the page title -->
-@section('title', 'Consumo de agua mensual')
+@section('title', 'Consumo de Electricidad Mensual')
 
 <!-- Includes a CSS file -->
 @section('css')

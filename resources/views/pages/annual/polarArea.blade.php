@@ -2,7 +2,7 @@
 @extends('layouts.base')
 
 <!-- Sets the page title -->
-@section('title', 'Welcome to SmartEcoSchool')
+@section('title', 'Consumo de Agua Anual')
 
 <!-- Includes a CSS file -->
 @section('css')

@@ -8,9 +8,9 @@ use Illuminate\Support\Facades\DB;
 class SensorMeasurementController extends Controller
 {
     /**
-     * Retrieves and displays the total annual water consumption for a specific sensor in a Laravel view.
+     * Retrieves and displays the total annual water consumption for sensor ID 2 in a Laravel view.
      * 
-     * @return View 'pages/annual/pie' with query results grouped by year for the water sensor (e.g., sensor ID 2).
+     * @return View 'pages/annual/pie' with query results grouped by year for sensor ID 1.
      */
     public function pie()
     {
@@ -32,7 +32,7 @@ class SensorMeasurementController extends Controller
     }
 
     /**
-     * Retrieves and displays the latest consumption data for a specific sensor in a Laravel view using the `radar` function.
+     * Retrieves and displays the total annual electricity consumption for sensor ID 1 in a Laravel view.
      * 
      * @return View 'pages/annual/radar' with query results grouped by year for sensor ID 1.
      */
@@ -55,9 +55,9 @@ class SensorMeasurementController extends Controller
     }
 
     /**
-     * Retrieves and displays the latest sensor data for annual water consumption in a Laravel view.
+     * Retrieves and displays the total monthly water consumption for sensor ID 2 in a Laravel view.
      * 
-     * @return View 'pages/monthly/bar' with query results grouped by year for sensor ID 2.
+     * @return View 'pages/monthly/bar' with query results grouped by month for sensor ID 2.
      */
     public function bar()
     {
@@ -78,7 +78,7 @@ class SensorMeasurementController extends Controller
     }
 
     /**
-     * Retrieves and displays monthly electricity consumption data for a specific sensor in a Laravel application.
+     * Retrieves and displays the total monthly electricity consumption for sensor ID 1 in a Laravel view.
      * 
      * @return View 'pages/monthly/line' with query results grouped by year and month for sensor ID 1.
      */

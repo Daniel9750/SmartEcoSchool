@@ -7,9 +7,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SensorMeasurementController;
 
 // Annual charts.
-Route::get('/agua/anual'          , [SensorMeasurementController::class,'pie'  ])->name('pages.annual.pie'  );
-Route::get('/electricidad/anual'  , [SensorMeasurementController::class,'radar'])->name('pages.annual.radar');
+Route::get('/agua/anual'          , [SensorMeasurementController::class,'polarArea'])->name('pages.annual.polarArea');
+Route::get('/electricidad/anual'  , [SensorMeasurementController::class,'radar'    ])->name('pages.annual.radar'    );
 
 // Monthly graphs.
-Route::get('/agua/mensual'        , [SensorMeasurementController::class,'bar'  ])->name('pages.monthly.bar' );
-Route::get('/electricidad/mensual', [SensorMeasurementController::class,'line' ])->name('pages.monthly.line');
+Route::get('/agua/mensual'        , [SensorMeasurementController::class,'bar'      ])->name('pages.monthly.bar'     );
+Route::get('/electricidad/mensual', [SensorMeasurementController::class,'line'     ])->name('pages.monthly.line'    );

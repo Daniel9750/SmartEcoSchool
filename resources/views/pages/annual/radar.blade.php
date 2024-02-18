@@ -16,13 +16,13 @@
         <script>
             document.addEventListener('DOMContentLoaded', function() {
                 var sensorMeasurements = @json($resultados);
-                
+
                 var labels = sensorMeasurements.map(function(measurement) {
                     return measurement.fecha;
                 });
 
                 var values = sensorMeasurements.map(function(measurement) {
-                    return measurement.consumo; 
+                    return measurement.consumo;
                 });
 
                 var ctx = document.getElementById('myChart').getContext('2d');
@@ -30,13 +30,15 @@
                     type: 'radar',
                     data: {
                         labels: labels,
-                        datasets: [{
-                            label: 'Consumo de Eléctricidad Anual',
-                            data: values,
-                            backgroundColor: 'rgba(255, 255, 0, 0.2)',
-                            borderColor: 'rgba(218, 165, 32, 1)',
-                            borderWidth: 1
-                        }]
+                        datasets: [
+                            {
+                                label: 'Años',
+                                data: values,
+                                backgroundColor: 'rgba(255, 255, 0, 0.2)',
+                                borderColor: 'rgba(218, 165, 32, 1)',
+                                borderWidth: 1
+                            }
+                        ]
                     },
                     options: {
                         scales: {

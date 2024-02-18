@@ -4,10 +4,7 @@
 namespace App\Http\Controllers;
 
 // Importing the dependencies.
-use App\Models\Building;
 use App\Models\Measurement;
-use App\Models\Sensor;
-use App\Models\SensorType;
 
 use Illuminate\Support\Facades\DB;
 
@@ -19,21 +16,20 @@ class SensorMeasurementController extends Controller
      * 
      * @return View 'pages/annual/pie' with query results grouped by year for sensor ID 2.
      */
-    public function pie()
+    public function polarArea()
     {
-        $resultados = Measurement::selectRaw('SUM(consumo) as consumo_total, YEAR(fecha) as fecha')
+        $resultados = Measurement::select('id_sensor', 'consumo', DB::raw('YEAR(fecha) as fecha'))
             ->whereIn('id_sensor', [2])
             ->whereIn('fecha', function ($query) {
                 $query->selectRaw('MAX(fecha)')
                     ->from('measurements')
                     ->where('id_sensor', 2)
-                    ->groupBy(DB::raw('YEAR(fecha), MONTH(fecha)'));
+                    ->groupBy(DB::raw('YEAR(fecha)'));
             })
-            ->groupBy(DB::raw('YEAR(fecha)'))
             ->orderByDesc('fecha')
             ->get();
-
-        return view('pages.annual.pie')->with('resultados', $resultados);
+        // dd($resultados);
+        return view('pages.annual.polarArea', compact('resultados'));
     }
 
     /**
@@ -54,6 +50,7 @@ class SensorMeasurementController extends Controller
             ->orderByDesc('fecha')
             ->get();
 
+        // dd($resultados);
         return view('pages.annual.radar', compact('resultados'));
     }
 
@@ -83,6 +80,7 @@ class SensorMeasurementController extends Controller
             return $item->year == $lastYear;
         });
     
+        // dd($resultados);
         return view('pages.monthly.bar', compact('resultados'));
     }
 
@@ -112,6 +110,7 @@ class SensorMeasurementController extends Controller
             return $item->year == $lastYear;
         });
     
-        return view('pages.monthly.bar', compact('resultados'));
+        // dd($resultados);
+        return view('pages.monthly.line', compact('resultados'));
     }
 }

@@ -17,7 +17,7 @@
         └── settings.blade.php
     └── 📁pages
         └── 📁annual
-            └── pie.blade.php
+            └── polarArea.blade.php
             └── radar.blade.php
         └── 📁monthly
             └── bar.blade.php

@@ -1,38 +1,51 @@
+<!-- Extends the base layout -->
 @extends('layouts.base')
 
+<!-- Sets the page title -->
 @section('title', 'Bienvenido a SmartEcoSchool')
 
+<!-- Includes a CSS file -->
 @section('css')
     <link rel="stylesheet" href="{{ asset('assets/css/graphics.css') }}" />
 @endsection
 
+<!-- Content section of the page -->
 @section('content')
 
+    <!-- Main content container -->
     <main>
 
         <!-- Container that renders the graph and allows modifying the resolution of the graph -->
         <canvas id="myChart" width="550" height="150"></canvas>
 
         <script>
+            // Executes when the DOM is fully loaded.
             document.addEventListener('DOMContentLoaded', function() {
+
+                // Retrieves JSON data from PHP variable.
                 var sensorMeasurements = @json($resultados);
 
+                // Extracts dates from the data.
                 var labels = sensorMeasurements.map(function(measurement) {
                     return measurement.fecha;
                 });
 
+                // Extracts consumption values from the data.
                 var values = sensorMeasurements.map(function(measurement) {
                     return measurement.consumo;
                 });
 
+                // Gets the 2D rendering context for the canvas.
                 var ctx = document.getElementById('myChart').getContext('2d');
+
+                // Creates a new Chart.js radar chart.
                 var myChart = new Chart(ctx, {
                     type: 'radar',
                     data: {
                         labels: labels,
                         datasets: [
                             {
-                                label: 'Años',
+                                label: '2023 - 2021',
                                 data: values,
                                 backgroundColor: 'rgba(255, 255, 0, 0.2)',
                                 borderColor: 'rgba(218, 165, 32, 1)',
@@ -55,13 +68,15 @@
     </main>
 
     <script>
+        // To debug code, log JSON data to the console.
         console.log(@json($resultados));
+
         document.addEventListener('DOMContentLoaded', function() {
+            // Redirect to the desired view every 60 seconds.
             setInterval(function() {
-                    // Redirect to the desired view.
                     window.location.href = '{{ route('pages.monthly.bar') }}';
                 },
-                60000); // 10 second interval (60000 milliseconds).
+                60000); // 60-second interval (60000 milliseconds).
         });
     </script>
 

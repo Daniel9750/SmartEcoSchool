@@ -53,11 +53,13 @@
     </main>
 
     <script>
+        // To debug code.
         console.log(@json($resultados));
+
         document.addEventListener('DOMContentLoaded', function() {
             setInterval(function() {
                     // Redirect to the desired view.
-                    window.location.href = '{{ route('pages.annual.pie') }}';
+                    window.location.href = '{{ route('pages.annual.polarArea') }}';
                 },
                 60000); // 10 second interval (60000 milliseconds).
         });

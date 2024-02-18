@@ -5,7 +5,7 @@
     <nav>
         <ul>
             <li>
-                <a href="{{ route('pages.annual.pie') }}">
+                <a href="{{ route('pages.annual.polarArea') }}">
                     <img src="{{ asset('assets/images/icons/pie.png') }}" />
                 </a>
             </li>

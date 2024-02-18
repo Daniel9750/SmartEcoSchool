@@ -1,34 +1,39 @@
 <?php
 
+// Establishes that it is a controller.
 namespace App\Http\Controllers;
 
-// Importing the models.
+// Importing the dependencies.
+use App\Models\Building;
+use App\Models\Measurement;
+use App\Models\Sensor;
+use App\Models\SensorType;
+
 use Illuminate\Support\Facades\DB;
 
+// Manages monthly and annual electricity and water queries and returns them along with the corresponding views.
 class SensorMeasurementController extends Controller
 {
     /**
      * Retrieves and displays the total annual water consumption for sensor ID 2 in a Laravel view.
      * 
-     * @return View 'pages/annual/pie' with query results grouped by year for sensor ID 1.
+     * @return View 'pages/annual/pie' with query results grouped by year for sensor ID 2.
      */
     public function pie()
     {
-        $query = "SELECT m.id_sensor, SUM(m.consumo) as consumo_total, YEAR(m.fecha) AS fecha
-        FROM measurements m
-        INNER JOIN (
-            SELECT MAX(fecha) AS ultima_fecha
-            FROM measurements
-            WHERE id_sensor = 2
-            GROUP BY YEAR(fecha), MONTH(fecha)
-        ) AS ultimas_fechas ON m.fecha = ultimas_fechas.ultima_fecha
-        WHERE m.id_sensor = 2
-        GROUP BY YEAR(m.fecha)
-        ORDER BY m.fecha DESC;";
-    
-        $resultados = DB::select($query);
-    
-        return view('pages.annual.pie')->with("resultados", $resultados);
+        $resultados = Measurement::selectRaw('SUM(consumo) as consumo_total, YEAR(fecha) as fecha')
+            ->whereIn('id_sensor', [2])
+            ->whereIn('fecha', function ($query) {
+                $query->selectRaw('MAX(fecha)')
+                    ->from('measurements')
+                    ->where('id_sensor', 2)
+                    ->groupBy(DB::raw('YEAR(fecha), MONTH(fecha)'));
+            })
+            ->groupBy(DB::raw('YEAR(fecha)'))
+            ->orderByDesc('fecha')
+            ->get();
+
+        return view('pages.annual.pie')->with('resultados', $resultados);
     }
 
     /**
@@ -38,20 +43,18 @@ class SensorMeasurementController extends Controller
      */
     public function radar()
     {
-        $query = "SELECT m.id_sensor, m.consumo, YEAR(m.fecha) AS fecha
-        FROM measurements m
-        INNER JOIN (
-            SELECT MAX(fecha) AS ultima_fecha
-            FROM measurements
-            WHERE id_sensor = 1
-            GROUP BY YEAR(fecha)
-        ) AS ultimas_fechas ON m.fecha = ultimas_fechas.ultima_fecha
-        WHERE m.id_sensor = 1
-        ORDER BY m.fecha DESC;";
+        $resultados = Measurement::select('id_sensor', 'consumo', DB::raw('YEAR(fecha) as fecha'))
+            ->whereIn('id_sensor', [1])
+            ->whereIn('fecha', function ($query) {
+                $query->selectRaw('MAX(fecha)')
+                    ->from('measurements')
+                    ->where('id_sensor', 1)
+                    ->groupBy(DB::raw('YEAR(fecha)'));
+            })
+            ->orderByDesc('fecha')
+            ->get();
 
-        $resultados = DB::select($query);
-
-        return view('pages.annual.radar')->with("resultados", $resultados);
+        return view('pages.annual.radar', compact('resultados'));
     }
 
     /**
@@ -61,20 +64,18 @@ class SensorMeasurementController extends Controller
      */
     public function bar()
     {
-        $query = "SELECT m.id_sensor, m.consumo, YEAR(m.fecha) AS fecha
-        FROM measurements m
-        INNER JOIN (
-            SELECT MAX(fecha) AS ultima_fecha
-            FROM measurements
-            WHERE id_sensor = 2
-            GROUP BY YEAR(fecha)
-        ) AS ultimas_fechas ON m.fecha = ultimas_fechas.ultima_fecha
-        WHERE m.id_sensor = 2
-        ORDER BY m.fecha DESC;";
+        $resultados = Measurement::select('id_sensor', 'consumo', DB::raw('YEAR(fecha) as fecha'))
+            ->whereIn('id_sensor', [2])
+            ->whereIn('fecha', function ($query) {
+                $query->selectRaw('MAX(fecha)')
+                    ->from('measurements')
+                    ->where('id_sensor', 2)
+                    ->groupBy(DB::raw('YEAR(fecha)'));
+            })
+            ->orderByDesc('fecha')
+            ->get();
 
-        $resultados = DB::select($query);
-
-        return view('pages.monthly.bar')->with("resultados", $resultados);
+        return view('pages.monthly.bar', compact('resultados'));
     }
 
     /**
@@ -84,19 +85,17 @@ class SensorMeasurementController extends Controller
      */
     public function line()
     {
-        $query = "SELECT m.id_sensor, m.consumo, CONCAT(YEAR(m.fecha), '-', LPAD(MONTH(m.fecha), 2, '0')) AS fecha
-        FROM measurements m
-        INNER JOIN (
-            SELECT MAX(fecha) AS ultima_fecha
-            FROM measurements
-            WHERE id_sensor = 1
-            GROUP BY YEAR(fecha), MONTH(fecha)
-        ) AS ultimas_fechas ON m.fecha = ultimas_fechas.ultima_fecha
-        WHERE m.id_sensor = 1
-        ORDER BY m.fecha DESC;";
+        $resultados = Measurement::select('id_sensor', 'consumo', DB::raw('CONCAT(YEAR(fecha), "-", LPAD(MONTH(fecha), 2, "0")) as fecha'))
+            ->whereIn('id_sensor', [1])
+            ->whereIn('fecha', function ($query) {
+                $query->selectRaw('MAX(fecha)')
+                    ->from('measurements')
+                    ->where('id_sensor', 1)
+                    ->groupBy(DB::raw('YEAR(fecha), MONTH(fecha)'));
+            })
+            ->orderByDesc('fecha')
+            ->get();
 
-        $resultados = DB::select($query);
-
-        return view('pages/monthly/line')->with("resultados", $resultados);
+        return view('pages.monthly.line', compact('resultados'));
     }
 }

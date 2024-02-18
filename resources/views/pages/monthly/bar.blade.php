@@ -1,4 +1,4 @@
-@extends('layout.base')
+@extends('layouts.base')
 
 @section('title', 'Bienvenido a SmartEcoSchool')
 
@@ -11,18 +11,18 @@
     <main>
 
         <!-- Container that renders the graph and allows modifying the resolution of the graph -->
-        <canvas id="myChart" width="350" height="150"></canvas>
+        <canvas id="myChart" width="550" height="250"></canvas>
 
         <script>
             document.addEventListener('DOMContentLoaded', function() {
-                var sensorMeasurements = @json($sensorMeasurements);
-
+                var sensorMeasurements = @json($resultados);
+                
                 var labels = sensorMeasurements.map(function(measurement) {
-                    return measurement.fecha_medicion + ' ' + measurement.hora_medicion;
+                    return measurement.fecha;
                 });
 
                 var values = sensorMeasurements.map(function(measurement) {
-                    return measurement.valor_medicion;
+                    return measurement.consumo; 
                 });
 
                 var ctx = document.getElementById('myChart').getContext('2d');
@@ -53,6 +53,7 @@
     </main>
 
     <script>
+        console.log(@json($resultados));
         document.addEventListener('DOMContentLoaded', function() {
             setInterval(function() {
                     // Redirect to the desired view.

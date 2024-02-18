@@ -1,0 +1,39 @@
+
+└── 📁migrations
+    └── 2024_02_06_154848_create_buildings_table.php
+    └── 2024_02_06_154856_create_sensor_types_table.php
+    └── 2024_02_06_161041_create_sensors_table.php
+    └── 2024_02_06_162209_create_measurements_table.php
+└── 📁Models
+    └── Building.php
+    └── Measurement.php
+    └── Sensor.php
+    └── SensorType.php
+└── 📁Controllers
+    └── SensorMeasurementController.php
+└── 📁views
+    └── 📁layouts
+        └── base.blade.php
+        └── settings.blade.php
+    └── 📁pages
+        └── 📁annual
+            └── pie.blade.php
+            └── radar.blade.php
+        └── 📁monthly
+            └── bar.blade.php
+            └── line.blade.php
+    └── 📁partials
+        └── header.blade.php
+└── 📁public
+    └── 📁architecture
+        └── SmartEcoSchool.md
+    └── 📁assets
+        └── 📁css
+            └── graphics.css
+            └── header.css
+        └── 📁images
+            └── 📁icons
+                └── statistics.png
+                └── table.png
+            └── 📁logos
+                └── SmartEcoSchool.png

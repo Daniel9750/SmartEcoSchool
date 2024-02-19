@@ -82,7 +82,11 @@
 
     <div class="content">
 
-        <h2>Consumo de Agua Anual</h2>
+        <h3>Consumo de Agua Anual: </h3>
+        
+        <h4>Desde 2020 hasta 2023</h4>
+        
+        <h2>53704418</h2>
 
     </div>
 

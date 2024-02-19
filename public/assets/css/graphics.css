@@ -55,10 +55,16 @@ td:first-child {
     font-weight: bold;
 }
 
-.graphic, .content {
+.graphic {
     width: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
+    height: 85vh;
+}
+
+.content {
+    width: 50%;
+    text-align: center;
     height: 85vh;
 }

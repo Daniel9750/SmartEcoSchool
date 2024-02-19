@@ -55,7 +55,7 @@ td:first-child {
     font-weight: bold;
 }
 
-.graphic {
+.graphic, .content {
     width: 50%;
     display: flex;
     justify-content: center;
@@ -63,8 +63,7 @@ td:first-child {
     height: 85vh;
 }
 
-.content {
+#content-one {
     width: 50%;
     text-align: center;
-    height: 85vh;
 }

@@ -82,11 +82,29 @@
 
     <div class="content">
 
-        <h3>Consumo de Agua Anual: </h3>
-        
-        <h4>Desde 2020 hasta 2023</h4>
-        
-        <h2>53704418</h2>
+            <div id="content-one">
+                
+                <h3>Consumo de Agua Anual</h3>
+                
+                <h4>Desde 2020 hasta 2023</h4>
+                
+                <h2>53704418</h2>
+
+                <img src="{{ asset('assets/images/icons/water.png') }}" />
+
+            </div>
+
+            <div id="content-two">
+            <h3>Consumo de Agua Anual</h3>
+                
+                <h4>Desde 2020 hasta 2023</h4>
+                
+                <h2>53704418</h2>
+
+                <img src="" alt="">
+
+            </div>
+
 
     </div>
 

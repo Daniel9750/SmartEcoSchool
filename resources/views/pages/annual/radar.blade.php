@@ -15,8 +15,9 @@
     <!-- Main content container -->
     <main>
 
+        <div class="graphic">
         <!-- Container that renders the graph and allows modifying the resolution of the graph -->
-        <canvas id="myChart" width="550" height="150"></canvas>
+        <canvas id="myChart" width="550" height="100"></canvas>
 
         <script>
             // Executes when the DOM is fully loaded.
@@ -82,6 +83,14 @@
                 });
             });
         </script>
+</div>
+
+
+<div class="content">
+
+        <h2>Consumo de Electricidad Anual</h2>
+
+    </div>
 
     </main>
 

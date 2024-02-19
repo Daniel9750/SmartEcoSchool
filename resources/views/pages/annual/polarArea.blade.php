@@ -6,14 +6,16 @@
 
 <!-- Includes a CSS file -->
 @section('css')
-    <link rel="stylesheet" href="{{ asset('assets/css/graphics.css') }}" />
+<link rel="stylesheet" href="{{ asset('assets/css/graphics.css') }}" />
 @endsection
 
 <!-- Content section of the page -->
 @section('content')
 
-    <!-- Main content container -->
-    <main>
+<!-- Main content container -->
+<main>
+
+    <div class="graphic">
 
         <!-- Container that renders the graph and allows modifying the resolution of the graph -->
         <canvas id="myChart" width="550" height="150"></canvas>
@@ -40,12 +42,12 @@
 
                 // Creates a new Chart.js chart.
                 var myChart = new Chart(ctx, {
-                    type: 'polarArea',                          // Specifies the chart type.
+                    type: 'polarArea', // Specifies the chart type.
                     data: {
-                        labels: labels,                         // Sets the labels for the chart.
+                        labels: labels, // Sets the labels for the chart.
                         datasets: [{
-                            label: 'Annual Water Consumption',  // Sets the label for the dataset.
-                            data: values,                       // Sets the data values for the dataset.
+                            label: 'Annual Water Consumption', // Sets the label for the dataset.
+                            data: values, // Sets the data values for the dataset.
                             backgroundColor: [
                                 'rgba(255, 99, 132, 0.2)',
                                 'rgba(54, 162, 235, 0.2)',
@@ -75,22 +77,33 @@
             });
         </script>
 
-    </main>
+    </div>
 
-    <script>
-        // To debug code, log JSON data to the console.
-        console.log(@json($resultados));
 
-        document.addEventListener('DOMContentLoaded', function() {
-            // Redirect to the desired view every 60 seconds.
-            setInterval(function() {
-                    window.location.href = '{{ route('pages.annual.radar') }}';
-                },
-                60000); // 60-second interval (60000 milliseconds).
-        });
-    </script>
+    <div class="content">
 
-    <!-- Load the free Chart.js library from the network using a Content Delivery Network -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <h2>Consumo de Agua Anual</h2>
+
+    </div>
+
+
+
+</main>
+
+<script>
+    // To debug code, log JSON data to the console.
+    console.log(@json($resultados));
+
+    document.addEventListener('DOMContentLoaded', function() {
+        // Redirect to the desired view every 60 seconds.
+        setInterval(function() {
+                window.location.href = '{{ route('pages.annual.radar') }}';
+            },
+            60000); // 60-second interval (60000 milliseconds).
+    });
+</script>
+
+<!-- Load the free Chart.js library from the network using a Content Delivery Network -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 @endsection

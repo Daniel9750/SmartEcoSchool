@@ -15,6 +15,9 @@
     <!-- Main content container -->
     <main>
 
+
+        
+
         <!-- Container that renders the bar graph -->
         <canvas id="myBarChart" width="550" height="250"></canvas>
 

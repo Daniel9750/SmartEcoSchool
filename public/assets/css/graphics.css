@@ -14,7 +14,7 @@ input {
     box-shadow: 0 0.2rem 0.4rem rgba(0, 0, 0, 0.1);
     cursor: pointer;
     background-color: #0b373f;
-    color: #FAFAFA;
+    color: #fafafa;
     font-weight: bold;
 }
 
@@ -33,8 +33,8 @@ table {
 }
 
 thead {
-    background-color: #86D3D3;
-    border: 0.15rem solid #86D3D3;
+    background-color: #86d3d3;
+    border: 0.15rem solid #86d3d3;
     color: #0b373f;
 }
 
@@ -43,14 +43,22 @@ th {
 }
 
 tbody tr {
-    background-color: #D7EEEE;
+    background-color: #d7eeee;
 }
 
 td {
     padding: 0.5rem;
-    border: 0.15rem solid #86D3D3;
+    border: 0.15rem solid #86d3d3;
 }
 
 td:first-child {
     font-weight: bold;
+}
+
+.graphic, .content {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 85vh;
 }

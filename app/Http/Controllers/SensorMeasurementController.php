@@ -40,26 +40,23 @@ class SensorMeasurementController extends Controller
             $year = $result->fecha;
             $consumption = $result->consumo;
 
-            // Subtract the consumption of all previous years.
-            foreach ($sortedResultados as $prevYear => $prevConsumption) {
-                if ($prevYear < $year) {
-                    $consumption -= $prevConsumption;
-                }
+            // Subtract the consumption of the previous year.
+            if ($previousConsumption !== null) {
+                $consumption -= $previousConsumption;
             }
 
             // Store the result in the new array.
             $sortedResultados[$year] = $consumption;
 
             // Update the previous consumption for the next iteration.
-            $previousConsumption = $result->consumo;
+            $previousConsumption += $result->consumo;
         }
 
         // Sort the array by year.
         ksort($sortedResultados);
-        // dd($sortedResultados);
-        
-        return view('pages.annual.polarArea', compact('sortedResultados'));
-    }
+            
+            return view('pages.annual.polarArea', compact('sortedResultados'));
+        }
 
 
     /**

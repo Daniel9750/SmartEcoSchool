@@ -49,7 +49,6 @@ class SensorMeasurementController extends Controller
         }
     
         // Ordena el array por año.
-        ksort($sortedResultados);
         dd($sortedResultados);
     
         return view('pages.annual.polarArea', compact('sortedResultados'));
@@ -97,8 +96,6 @@ class SensorMeasurementController extends Controller
             $previousConsumption = $result->consumo;
         }
 
-        // Sort the array by year.
-        ksort($sortedResultados);
         // dd($sortedResultados);
 
         return view('pages.annual.radar', compact('sortedResultados'));

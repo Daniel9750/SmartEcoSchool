@@ -84,13 +84,38 @@
                 <h4>Desde 2020 hasta 2023</h4>
 
                 <!-- Display the total consumption for all years -->
-                <h2>{{ array_sum($sortedResultados) }}</h2>
+                <h2>{{ $totalConsumption }}</h2>
 
                 <img src="{{ asset('assets/images/icons/water.png') }}" />
 
             </div>
 
             <div id="content-two">
+                <h3>Consumo de Agua Anual</h3>
+
+                <h4>Desde 2020 hasta 2023</h4>
+
+                <!-- Display the total consumption for all years -->
+                <h2>{{ array_sum($sortedResultados) }}</h2>
+
+                <img src="" alt="">
+
+            </div>
+
+            <div id="content-three">
+
+                <h3>Consumo de Agua Anual</h3>
+
+                <h4>Desde 2020 hasta 2023</h4>
+
+                <!-- Display the total consumption for all years -->
+                <h2>{{ $totalConsumption }}</h2>
+
+                <img src="{{ asset('assets/images/icons/water.png') }}" />
+
+            </div>
+
+            <div id="content-four">
                 <h3>Consumo de Agua Anual</h3>
 
                 <h4>Desde 2020 hasta 2023</h4>

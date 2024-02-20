@@ -30,7 +30,7 @@ class SensorMeasurementController extends Controller
             ->orderByDesc('fecha')
             ->get();
 
-        // dd($resultados);
+        //dd($resultados);
 
         // Procesa los resultados para calcular la diferencia de consumo para cada año.
         $sortedResultados = [];
@@ -48,12 +48,13 @@ class SensorMeasurementController extends Controller
 
             // Acumula el consumo total para la próxima iteración.
             $totalConsumption += $result->consumo;
+
         }
 
         // Ordena el array por año.
-        dd($sortedResultados);
+       // dd($sortedResultados);
 
-        return view('pages.annual.polarArea', compact('sortedResultados'));
+        return view('pages.annual.polarArea', compact('sortedResultados', 'totalConsumption'));
     }
 
     /**
@@ -95,9 +96,9 @@ class SensorMeasurementController extends Controller
         }
 
         // Ordena el array por año.
-        dd($sortedResultados);
+        // dd($sortedResultados);
 
-        return view('pages.annual.radar', compact('sortedResultados'));
+        return view('pages.annual.radar', compact('sortedResultados', 'totalConsumption'));
     }
 
     /**

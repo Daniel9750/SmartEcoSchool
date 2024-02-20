@@ -18,7 +18,7 @@ class SensorMeasurementController extends Controller
      */
     public function polarArea()
     {
-        // Retrieve the maximum date for each year for the given sensor.
+        // Obtén la fecha máxima para cada año del sensor proporcionado.
         $resultados = Measurement::select('id_sensor', 'consumo', DB::raw('YEAR(fecha) as fecha'))
             ->whereIn('id_sensor', [2])
             ->whereIn('fecha', function ($query) {
@@ -29,35 +29,31 @@ class SensorMeasurementController extends Controller
             })
             ->orderByDesc('fecha')
             ->get();
-
-        // dd($resultados);
-        
-        // Process the results to calculate the difference in consumption for each year.
+    
+        // Procesa los resultados para calcular la diferencia de consumo para cada año.
         $sortedResultados = [];
-        $previousConsumption = null;
-
+        $totalConsumption = 0;
+    
         foreach ($resultados as $result) {
             $year = $result->fecha;
             $consumption = $result->consumo;
-
-            // Subtract the consumption of the previous year.
-            if ($previousConsumption !== null) {
-                $consumption -= $previousConsumption;
-            }
-
-            // Store the result in the new array.
+    
+            // Resta el consumo acumulado de todos los años anteriores.
+            $consumption -= $totalConsumption;
+    
+            // Almacena el resultado en el nuevo array.
             $sortedResultados[$year] = $consumption;
-
-            // Update the previous consumption for the next iteration.
-            $previousConsumption += $result->consumo;
+    
+            // Acumula el consumo total para la próxima iteración.
+            $totalConsumption += $result->consumo;
         }
-
-        // Sort the array by year.
+    
+        // Ordena el array por año.
         ksort($sortedResultados);
-            
-            return view('pages.annual.polarArea', compact('sortedResultados'));
-        }
-
+        dd($sortedResultados);
+    
+        return view('pages.annual.polarArea', compact('sortedResultados'));
+    }    
 
     /**
      * Retrieves and displays the total annual electricity consumption for sensor ID 1 in a Laravel view.

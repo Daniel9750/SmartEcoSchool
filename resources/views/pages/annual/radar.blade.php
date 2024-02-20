@@ -95,14 +95,9 @@
             </div>
 
             <div id="content-two">
-                <h3>Consumo de Electricidad Anual</h3>
+                <h3>Consejo: Desconecta el cargador cuando dejes de usarlo</h3>
 
-                <h4>Desde 2020 hasta 2023</h4>
-
-                <!-- Display the total consumption for all years -->
-                <h2>{{ array_sum($sortedResultados) }}</h2>
-
-                <img src="" alt="">
+                <h4>Incluso cuando no están cargando, los cargadores enchufados consumen energía.</h4>
 
             </div>
 

@@ -92,6 +92,7 @@ td:first-child {
 }
 #content-two {
     grid-area: content-two;
+    text-align: center;
 }
 #content-three {
     grid-area: content-three;

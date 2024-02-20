@@ -20,7 +20,8 @@ class SensorMeasurementController extends Controller
     {
         $resultados = Measurement::select('id_sensor', 'consumo', DB::raw('YEAR(fecha) as fecha'))
             ->whereIn('id_sensor', [2])
-            ->whereIn('fecha', function ($query) {
+            ->whereIn('fecha', function ($query)
+            {
                 $query->selectRaw('MAX(fecha)')
                     ->from('measurements')
                     ->where('id_sensor', 2)
@@ -28,8 +29,36 @@ class SensorMeasurementController extends Controller
             })
             ->orderByDesc('fecha')
             ->get();
+
         // dd($resultados);
-        return view('pages.annual.polarArea', compact('resultados'));
+        
+        // Process the results to calculate the difference in consumption for each year.
+        $sortedResultados = [];
+        $previousConsumption = null;
+
+        foreach ($resultados as $result)
+        {
+            $year = $result->fecha;
+            $consumption = $result->consumo;
+
+            if ($previousConsumption !== null)
+            {
+                // Subtract the consumption of the previous year.
+                $consumption -= $previousConsumption;
+            }
+
+            // Store the result in the new array.
+            $sortedResultados[$year] = $consumption;
+
+            // Update the previous consumption for the next iteration.
+            $previousConsumption = $result->consumo;
+        }
+
+        // Sort the array by year.
+        ksort($sortedResultados);
+        // dd($sortedResultados);
+
+        return view('pages.annual.polarArea', compact('sortedResultados'));
     }
 
     /**
@@ -41,7 +70,8 @@ class SensorMeasurementController extends Controller
     {
         $resultados = Measurement::select('id_sensor', 'consumo', DB::raw('YEAR(fecha) as fecha'))
             ->whereIn('id_sensor', [1])
-            ->whereIn('fecha', function ($query) {
+            ->whereIn('fecha', function ($query) 
+            {
                 $query->selectRaw('MAX(fecha)')
                     ->from('measurements')
                     ->where('id_sensor', 1)
@@ -50,8 +80,35 @@ class SensorMeasurementController extends Controller
             ->orderByDesc('fecha')
             ->get();
 
+        // Process the results to calculate the difference in consumption for each year.
+        $sortedResultados = [];
+        $previousConsumption = null;
+
+        foreach ($resultados as $result)
+        {
+            $year = $result->fecha;
+            $consumption = $result->consumo;
+
+            if ($previousConsumption !== null)
+            {
+                // Subtract the consumption of the previous year.
+                $consumption -= $previousConsumption;
+            }
+
+            // Store the result in the new array.
+            $sortedResultados[$year] = $consumption;
+
+            // Update the previous consumption for the next iteration.
+            $previousConsumption = $result->consumo;
+        }
+
+        // Sort the array by year.
+        ksort($sortedResultados);
+
         // dd($resultados);
-        return view('pages.annual.radar', compact('resultados'));
+        // dd($sortedResultados);
+
+        return view('pages.annual.radar', compact('sortedResultados'));
     }
 
     /**
@@ -62,7 +119,8 @@ class SensorMeasurementController extends Controller
     public function bar()
     {
         $resultados = Measurement::select('id_sensor', DB::raw('MAX(consumo) as consumo_total'), DB::raw('YEAR(fecha) as year'), DB::raw('MONTH(fecha) as month'))
-            ->whereIn('fecha', function ($query) {
+            ->whereIn('fecha', function ($query)
+            {
                 $query->select(DB::raw('MAX(fecha)'))
                     ->from('measurements')
                     ->whereRaw('id_sensor = measurements.id_sensor')
@@ -73,14 +131,16 @@ class SensorMeasurementController extends Controller
             ->orderByDesc('year')
             ->orderByDesc('month')
             ->get();
-    
+
         // Filter only results from the last year stored.
         $lastYear = $resultados->max('year');
-        $resultados = $resultados->filter(function ($item) use ($lastYear) {
+        $resultados = $resultados->filter(function ($item) use ($lastYear)
+        {
             return $item->year == $lastYear;
         });
-    
-        // dd($resultados);
+
+        // dd($sortedResultados);
+
         return view('pages.monthly.bar', compact('resultados'));
     }
 
@@ -92,7 +152,8 @@ class SensorMeasurementController extends Controller
     public function line()
     {
         $resultados = Measurement::select('id_sensor', DB::raw('MAX(consumo) as consumo_total'), DB::raw('YEAR(fecha) as year'), DB::raw('MONTH(fecha) as month'))
-            ->whereIn('fecha', function ($query) {
+            ->whereIn('fecha', function ($query)
+            {
                 $query->select(DB::raw('MAX(fecha)'))
                     ->from('measurements')
                     ->whereRaw('id_sensor = measurements.id_sensor')
@@ -103,13 +164,14 @@ class SensorMeasurementController extends Controller
             ->orderByDesc('year')
             ->orderByDesc('month')
             ->get();
-    
+
         // Filter only results from the last year stored.
         $lastYear = $resultados->max('year');
-        $resultados = $resultados->filter(function ($item) use ($lastYear) {
+        $resultados = $resultados->filter(function ($item) use ($lastYear)
+        {
             return $item->year == $lastYear;
         });
-    
+
         // dd($resultados);
         return view('pages.monthly.line', compact('resultados'));
     }

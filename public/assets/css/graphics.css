@@ -99,4 +99,9 @@ td:first-child {
 }
 #content-four {
     grid-area: content-four;
+
+}
+
+#qr {
+    transform: scale(3.5);
 }

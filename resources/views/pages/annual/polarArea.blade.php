@@ -111,14 +111,12 @@
             </div>
 
             <div id="content-four">
-                <h3>Consumo de Agua Anual</h3>
-
-                <h4>Desde 2020 hasta 2023</h4>
-
-                <!-- Display the total consumption for all years -->
-                <h2>{{ array_sum($sortedResultados) }}</h2>
-
-                <img src="" alt="">
+                <h3>Más sobre SmartEcoSchool:</h3>
+                <br>
+                <br>
+                <br>
+                    
+                <img id="qr" src="{{ asset('assets/images/icons/qr.png') }}" />
 
             </div>
 

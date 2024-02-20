@@ -29,30 +29,32 @@ class SensorMeasurementController extends Controller
             })
             ->orderByDesc('fecha')
             ->get();
-    
+
+        // dd($resultados);
+
         // Procesa los resultados para calcular la diferencia de consumo para cada año.
         $sortedResultados = [];
         $totalConsumption = 0;
-    
+
         foreach ($resultados as $result) {
             $year = $result->fecha;
             $consumption = $result->consumo;
-    
+
             // Resta el consumo acumulado de todos los años anteriores.
             $consumption -= $totalConsumption;
-    
+
             // Almacena el resultado en el nuevo array.
-            $sortedResultados[$year] = $consumption;
-    
+            $sortedResultados[$year] = abs($consumption);
+
             // Acumula el consumo total para la próxima iteración.
             $totalConsumption += $result->consumo;
         }
-    
+
         // Ordena el array por año.
         dd($sortedResultados);
-    
+
         return view('pages.annual.polarArea', compact('sortedResultados'));
-    }    
+    }
 
     /**
      * Retrieves and displays the total annual electricity consumption for sensor ID 1 in a Laravel view.
@@ -76,27 +78,24 @@ class SensorMeasurementController extends Controller
 
         // Process the results to calculate the difference in consumption for each year.
         $sortedResultados = [];
-        $previousConsumption = null;
+        $totalConsumption = 0;
 
         foreach ($resultados as $result) {
             $year = $result->fecha;
             $consumption = $result->consumo;
 
-            // Subtract the consumption of all previous years.
-            foreach ($sortedResultados as $prevYear => $prevConsumption) {
-                if ($prevYear < $year) {
-                    $consumption -= $prevConsumption;
-                }
-            }
+            // Resta el consumo acumulado de todos los años anteriores.
+            $consumption -= $totalConsumption;
 
-            // Store the result in the new array.
-            $sortedResultados[$year] = $consumption;
+            // Almacena el resultado en el nuevo array.
+            $sortedResultados[$year] = abs($consumption);
 
-            // Update the previous consumption for the next iteration.
-            $previousConsumption = $result->consumo;
+            // Acumula el consumo total para la próxima iteración.
+            $totalConsumption += $result->consumo;
         }
 
-        // dd($sortedResultados);
+        // Ordena el array por año.
+        dd($sortedResultados);
 
         return view('pages.annual.radar', compact('sortedResultados'));
     }

@@ -38,12 +38,12 @@
 
                     // Creates a new Chart.js chart.
                     var myChart = new Chart(ctx, {
-                        type: 'polarArea',                          // Specifies the chart type.
+                        type: 'polarArea', // Specifies the chart type.
                         data: {
-                            labels: labels,                         // Sets the labels for the chart.
+                            labels: labels, // Sets the labels for the chart.
                             datasets: [{
-                                label: 'Annual Water Consumption',  // Sets the label for the dataset.
-                                data: values,                       // Sets the data values for the dataset.
+                                label: 'Annual Water Consumption', // Sets the label for the dataset.
+                                data: values, // Sets the data values for the dataset.
                                 backgroundColor: [
                                     'rgba(255, 99, 132, 0.2)',
                                     'rgba(54, 162, 235, 0.2)',
@@ -111,11 +111,8 @@
             </div>
 
             <div id="content-four">
+
                 <h3>Más sobre SmartEcoSchool:</h3>
-                <br>
-                <br>
-                <br>
-                    
                 <img id="qr" src="{{ asset('assets/images/icons/qr.png') }}" />
 
             </div>

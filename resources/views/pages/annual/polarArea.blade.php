@@ -79,41 +79,112 @@
 
             <div id="content-one">
 
-                <h3>Consumo de Agua Anual</h3>
+                <h2>CONSUMO ANUAL DE AGUA</h2>
 
-                <h4>Desde 2020 hasta 2023</h4>
+                <br />
 
-                <!-- Display the total consumption for all years -->
-                <h2>{{ $totalConsumption }}</h2>
-
-                <img src="{{ asset('assets/images/icons/water.png') }}" />
+                <div class="sub-content-one">
+                    <table>
+                        <tbody>
+                            <!-- Shows consumption for each year -->
+                            @foreach ($sortedResultados as $year => $consumption)
+                                <tr>
+                                    <td>{{ $year }}:</td>
+                                    <td>{{ $consumption }}</td>
+                                    <td>m3</td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
 
             </div>
 
             <div id="content-two">
-                <h3>Consejo: Cierra bien el grifo</h3>
 
-                <h4>Incluso pequeñas fugas pueden sumar grandes cantidades de agua desperdiciada.</h4>
+                <h2>CONSUMO TOTAL DE AGUA</h2>
+
+                <br /><br />
+
+                <img class="logo-content-two" src="{{ asset('assets/images/icons/water.png') }}" />
+
+                <br />
+
+                <!-- Display the total consumption for all years -->
+                <h3>{{ $totalConsumption }} m3</h2>
 
             </div>
 
             <div id="content-three">
 
-                <h3>Consumo de Agua Anual</h3>
+                <h2>RESUMEN</h2>
 
-                <h4>Desde 2020 hasta 2023</h4>
+                <br />
 
-                <!-- Display the total consumption for all years -->
-                <h2>{{ $totalConsumption }}</h2>
+                <div class="sub-content-one">
+                    <!-- Shows consumption for each year -->
+                    @php
+                        $worstYear = null;
+                        $bestYear = null;
+                        $minConsumption = null;
+                        $maxConsumption = null;
+                    @endphp
 
-                <img src="{{ asset('assets/images/icons/water.png') }}" />
+                    @foreach ($sortedResultados as $year => $consumption)
+                        @if ($maxConsumption === null || $consumption > $maxConsumption)
+                            @php
+                                $maxConsumption = $consumption;
+                                $worstYear = $year;
+                            @endphp
+                        @endif
+
+                        @if ($minConsumption === null || $consumption < $minConsumption)
+                            @php
+                                $minConsumption = $consumption;
+                                $bestYear = $year;
+                            @endphp
+                        @endif
+                    @endforeach
+                    <table>
+                        <thead>
+                            <tr>
+                                <td colspan="3" class="summary">MEJOR AÑO 😎</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>{{ $bestYear }}</td>
+                                <td class="summary2">{{ $minConsumption }}</td>
+                                <td class="summary2">m3</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <br />
+                    <table>
+                        <thead>
+                            <tr>
+                                <td colspan="3" class="summary">PEOR AÑO 😇</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>{{ $worstYear }}</td>
+                                <td class="summary2">{{ $maxConsumption }}</td>
+                                <td class="summary2">m3</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
 
             </div>
 
             <div id="content-four">
 
-                <h3>Más sobre SmartEcoSchool:</h3>
-                <img id="qr" src="{{ asset('assets/images/icons/qr.png') }}" />
+                <img id="logo-container" src="{{ asset('assets/images/logos/SmartEcoSchool.png') }}" />
+
+                <div id="qr-container">
+                    <img id="qr" src="{{ asset('assets/images/icons/qr.png') }}" />
+                </div>
 
             </div>
 

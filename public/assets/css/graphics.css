@@ -26,33 +26,14 @@ main {
     justify-content: center;
 }
 
-table {
-    width: 90%;
-    border-collapse: collapse;
-    margin-top: 1rem;
-}
-
-thead {
-    background-color: #86d3d3;
-    border: 0.15rem solid #86d3d3;
-    color: #0b373f;
-}
-
-th {
-    padding: 10px;
-}
-
-tbody tr {
-    background-color: #d7eeee;
-}
-
 td {
     padding: 0.5rem;
-    border: 0.15rem solid #86d3d3;
+    font-size: 1.2rem;
 }
 
 td:first-child {
     font-weight: bold;
+    text-align: right;
 }
 
 .graphic {
@@ -68,40 +49,89 @@ td:first-child {
     width: 50%;
     display: grid;
     height: 85vh;
-    grid-template-areas: 'content-one content-two'
-                         'content-three content-four';
+    grid-template-areas:
+        "content-one content-two"
+        "content-three content-four";
     justify-content: space-evenly;
     align-items: center;
 }
 
-#content-one, #content-two,
-#content-three, #content-four {
+#content-one,
+#content-two,
+#content-three,
+#content-four {
     width: 20rem;
     height: 20rem;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
     align-content: center;
     background: linear-gradient(#002c5355, #002c5350, #002c5345);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1),
+        /* Tamaño reducido */ 0 0 2px rgba(0, 0, 0, 0.05),
+        -2px 2px 2px rgba(100, 100, 100, 0.1),
+        2px -2px 2px rgba(100, 100, 100, 0.1);
     border-radius: 2.5rem;
+    padding: 5%;
 }
 
 #content-one {
     grid-area: content-one;
 }
+
 #content-two {
     grid-area: content-two;
     text-align: center;
 }
+
 #content-three {
     grid-area: content-three;
 }
+
 #content-four {
     grid-area: content-four;
-
 }
 
-#qr {
+#content-four #qr {
     transform: scale(3.5);
+}
+
+h1,
+h2,
+h3 {
+    margin: 0;
+    padding: 0;
+}
+
+h2 {
+    color: #c11616;
+    margin-top: 15%;
+    font-size: 1.2rem;
+}
+
+h3 {
+    font-size: 1.5rem;
+}
+
+#logo-container {
+    transform: scale(1.5);
+    margin-top: 10%;
+}
+
+#qr-container {
+    margin-top: 30%;
+}
+
+.logo-content-two {
+    transform: scale(1.2);
+}
+
+.summary {
+    text-align: left !important;
+    font-size: 1rem;
+    color: #0b373f;
+}
+
+.summary2 {
+    text-align: right !important;
 }

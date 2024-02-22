@@ -1,5 +1,8 @@
 header {
     background: linear-gradient(#002c5355, #002c5350, #002c5345);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 0 2px rgba(0, 0, 0, 0.05),
+        -2px 2px 2px rgba(100, 100, 100, 0.1),
+        2px -2px 2px rgba(100, 100, 100, 0.1);
     display: flex;
     position: sticky;
     top: 0rem;
@@ -20,14 +23,14 @@ h1 {
 
 #institution,
 #control-panel {
-    width: 20%;
+    width: 30%;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
 nav {
-    width: 80%;
+    width: 40%;
 }
 
 nav > ul > li > a {
@@ -52,8 +55,4 @@ a {
     display: flex;
     justify-content: center;
     align-items: center;
-}
-
-span {
-    color: green;
 }

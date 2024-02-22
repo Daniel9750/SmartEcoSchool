@@ -83,44 +83,112 @@
 
             <div id="content-one">
 
-                <h3>Consumo de Electricidad Anual</h3>
+                <h2>CONSUMO ELÉCTRICO ANUAL</h2>
 
-                <h4>Desde 2020 hasta 2023</h4>
+                <br />
 
-                <!-- Display the total consumption for all years -->
-                <h2>{{ $totalConsumption }}</h2>
-
-                <img src="{{ asset('assets/images/icons/rayo.png') }}" />
+                <div class="sub-content-one">
+                    <table>
+                        <tbody>
+                            <!-- Shows consumption for each year -->
+                            @foreach ($sortedResultados as $year => $consumption)
+                                <tr>
+                                    <td>{{ $year }}:</td>
+                                    <td>{{ $consumption }}</td>
+                                    <td>kW⋅h</td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
 
             </div>
 
             <div id="content-two">
-                <h3>Consejo: Desconecta el cargador cuando dejes de usarlo</h3>
 
-                <h4>Incluso cuando no están cargando, los cargadores enchufados consumen energía.</h4>
+                <h2>CONSUMO ELÉCTRICO TOTAL</h2>
+
+                <br /><br />
+
+                <img src="{{ asset('assets/images/icons/ray.png') }}" />
+
+                <br />
+
+                <!-- Display the total consumption for all years -->
+                <h3>{{ $totalConsumption }} kW⋅h</h2>
 
             </div>
 
             <div id="content-three">
 
-                <h3>Consumo de Electricidad Anual</h3>
+                <h2>RESUMEN</h2>
 
-                <h4>Desde 2020 hasta 2023</h4>
+                <br />
 
-                <!-- Display the total consumption for all years -->
-                <h2>{{ $totalConsumption }}</h2>
+                <div class="sub-content-one">
+                    <!-- Shows consumption for each year -->
+                    @php
+                        $worstYear = null;
+                        $bestYear = null;
+                        $minConsumption = null;
+                        $maxConsumption = null;
+                    @endphp
 
-                <img src="{{ asset('assets/images/icons/rayo.png') }}" />
+                    @foreach ($sortedResultados as $year => $consumption)
+                        @if ($maxConsumption === null || $consumption > $maxConsumption)
+                            @php
+                                $maxConsumption = $consumption;
+                                $worstYear = $year;
+                            @endphp
+                        @endif
+
+                        @if ($minConsumption === null || $consumption < $minConsumption)
+                            @php
+                                $minConsumption = $consumption;
+                                $bestYear = $year;
+                            @endphp
+                        @endif
+                    @endforeach
+                    <table>
+                        <thead>
+                            <tr>
+                                <td colspan="3" class="summary">MEJOR AÑO ✨</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>{{ $bestYear }}</td>
+                                <td>{{ $minConsumption }}</td>
+                                <td>kW⋅h</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <br />
+                    <table>
+                        <thead>
+                            <tr>
+                                <td colspan="3" class="summary">PEOR AÑO ❌</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>{{ $worstYear }}</td>
+                                <td>{{ $maxConsumption }}</td>
+                                <td>kW⋅h</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
 
             </div>
 
             <div id="content-four">
-                <h3>Más sobre SmartEcoSchool:</h3>
-                <br>
-                <br>
-                <br>
-                    
-                <img id="qr" src="{{ asset('assets/images/icons/qr.png') }}" />
+
+                <img id="logo-container" src="{{ asset('assets/images/logos/SmartEcoSchool.png') }}" />
+
+                <div id="qr-container">
+                    <img id="qr" src="{{ asset('assets/images/icons/qr.png') }}" />
+                </div>
 
             </div>
 

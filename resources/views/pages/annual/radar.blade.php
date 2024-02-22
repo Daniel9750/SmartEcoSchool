@@ -152,7 +152,7 @@
                     <table>
                         <thead>
                             <tr>
-                                <td colspan="3" class="summary">MEJOR AÑO ✨</td>
+                                <td colspan="3" class="summary">MEJOR AÑO 😎</td>
                             </tr>
                         </thead>
                         <tbody>
@@ -167,7 +167,7 @@
                     <table>
                         <thead>
                             <tr>
-                                <td colspan="3" class="summary">PEOR AÑO ❌</td>
+                                <td colspan="3" class="summary">PEOR AÑO 😇</td>
                             </tr>
                         </thead>
                         <tbody>

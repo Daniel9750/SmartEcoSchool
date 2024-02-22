@@ -99,7 +99,7 @@ class SensorMeasurementController extends Controller
             $totalConsumption += $difference;
         }
 
-        return view('pages.annual.polarArea', compact('sortedResultados', 'totalConsumption'));
+        return view('pages.annual.radar', compact('sortedResultados', 'totalConsumption'));
     }
 
     /**

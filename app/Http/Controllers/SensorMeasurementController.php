@@ -75,30 +75,31 @@ class SensorMeasurementController extends Controller
             ->orderByDesc('fecha')
             ->get();
 
-        // dd($resultados);
+        // Reverse the results since the year 2023 arrives in position 0.
+        $resultadosRevertidos = $resultados->reverse();
 
-        // Process the results to calculate the difference in consumption for each year.
+        // Stores the subtraction of the years.
         $sortedResultados = [];
+
+        // Stores the total consumption of all years.
         $totalConsumption = 0;
 
-        foreach ($resultados as $result) {
+        // Processes the results to calculate the consumption difference for each year.
+        foreach ($resultadosRevertidos as $result) {
             $year = $result->fecha;
             $consumption = $result->consumo;
-
-            // Resta el consumo acumulado de todos los años anteriores.
-            $consumption -= $totalConsumption;
-
-            // Almacena el resultado en el nuevo array.
-            $sortedResultados[$year] = abs($consumption);
-
-            // Acumula el consumo total para la próxima iteración.
-            $totalConsumption += $result->consumo;
+        
+            // Subtract the accumulated consumption of all previous years.
+            $difference = $consumption - $totalConsumption;
+        
+            // Store the result in the new array.
+            $sortedResultados[$year] = $difference;
+        
+            // Accumulate the total consumption for the next iteration.
+            $totalConsumption += $difference;
         }
 
-        // Ordena el array por año.
-        // dd($sortedResultados);
-
-        return view('pages.annual.radar', compact('sortedResultados', 'totalConsumption'));
+        return view('pages.annual.polarArea', compact('sortedResultados', 'totalConsumption'));
     }
 
     /**

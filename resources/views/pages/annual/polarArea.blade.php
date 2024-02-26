@@ -79,7 +79,7 @@
 
             <div id="content-one">
 
-                <h2>CONSUMO ANUAL DE AGUA</h2>
+                <h2>CONSUMO DE AGUA ANUAL</h2>
 
                 <br />
 

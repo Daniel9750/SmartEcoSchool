@@ -18,7 +18,7 @@ class SensorMeasurementController extends Controller
      */
     public function polarArea()
     {
-        $title = 'CONSUMO ANUAL DE AGUA';
+        $title = 'CONSUMO DE AGUA ANUAL';
 
         // Obtén la fecha máxima para cada año del sensor proporcionado.
         $resultados = Measurement::select('id_sensor', 'consumo', DB::raw('YEAR(fecha) as fecha'))
@@ -114,7 +114,7 @@ class SensorMeasurementController extends Controller
      */
     public function bar()
     {
-        $title = 'CONSUMO MENSUAL DE AGUA';
+        $title = 'CONSUMO DE AGUA MENSUAL';
 
         $resultados = Measurement::select('id_sensor', DB::raw('MAX(consumo) as consumo_total'), DB::raw('YEAR(fecha) as year'), DB::raw('MONTH(fecha) as month'))
             ->whereIn('fecha', function ($query) {

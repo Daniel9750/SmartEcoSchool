@@ -1,6 +1,6 @@
 <header>
     <div id="institution">
-        <h1>Data provided by IES El Rincón</h1>
+        <h1>{{ $title }}</h1>
     </div>
     <nav>
         <ul>

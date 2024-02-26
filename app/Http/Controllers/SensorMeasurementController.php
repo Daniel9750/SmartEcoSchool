@@ -18,6 +18,8 @@ class SensorMeasurementController extends Controller
      */
     public function polarArea()
     {
+        $title = 'CONSUMO ANUAL DE AGUA';
+
         // Obtén la fecha máxima para cada año del sensor proporcionado.
         $resultados = Measurement::select('id_sensor', 'consumo', DB::raw('YEAR(fecha) as fecha'))
             ->whereIn('id_sensor', [2])
@@ -54,7 +56,8 @@ class SensorMeasurementController extends Controller
             $totalConsumption += $difference;
         }
 
-        return view('pages.annual.polarArea', compact('sortedResultados', 'totalConsumption'));
+        return view('pages.annual.polarArea', compact('title', 'sortedResultados', 'totalConsumption'));
+
     }
 
     /**
@@ -64,6 +67,8 @@ class SensorMeasurementController extends Controller
      */
     public function radar()
     {
+        $title = 'CONSUMO ELÉCTRICO ANUAL';
+
         $resultados = Measurement::select('id_sensor', 'consumo', DB::raw('YEAR(fecha) as fecha'))
             ->whereIn('id_sensor', [1])
             ->whereIn('fecha', function ($query) {
@@ -99,7 +104,7 @@ class SensorMeasurementController extends Controller
             $totalConsumption += $difference;
         }
 
-        return view('pages.annual.radar', compact('sortedResultados', 'totalConsumption'));
+        return view('pages.annual.radar', compact('title', 'sortedResultados', 'totalConsumption'));
     }
 
     /**
@@ -109,6 +114,8 @@ class SensorMeasurementController extends Controller
      */
     public function bar()
     {
+        $title = 'CONSUMO MENSUAL DE AGUA';
+
         $resultados = Measurement::select('id_sensor', DB::raw('MAX(consumo) as consumo_total'), DB::raw('YEAR(fecha) as year'), DB::raw('MONTH(fecha) as month'))
             ->whereIn('fecha', function ($query) {
                 $query->select(DB::raw('MAX(fecha)'))
@@ -130,7 +137,7 @@ class SensorMeasurementController extends Controller
 
         // dd($sortedResultados);
 
-        return view('pages.monthly.bar', compact('resultados'));
+        return view('pages.monthly.bar', compact('title', 'resultados'));
     }
 
     /**
@@ -140,6 +147,8 @@ class SensorMeasurementController extends Controller
      */
     public function line()
     {
+        $title = 'CONSUMO ELÉCTRICO MENSUAL';
+
         $resultados = Measurement::select('id_sensor', DB::raw('MAX(consumo) as consumo_total'), DB::raw('YEAR(fecha) as year'), DB::raw('MONTH(fecha) as month'))
             ->whereIn('fecha', function ($query) {
                 $query->select(DB::raw('MAX(fecha)'))
@@ -160,6 +169,7 @@ class SensorMeasurementController extends Controller
         });
 
         // dd($resultados);
-        return view('pages.monthly.line', compact('resultados'));
+        return view('pages.monthly.line', compact('title', 'resultados'));
     }
+
 }

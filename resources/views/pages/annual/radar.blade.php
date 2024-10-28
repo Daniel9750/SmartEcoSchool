@@ -115,7 +115,7 @@
                 <br />
 
                 <!-- Display the total consumption for all years -->
-                <h3>{{ $totalConsumption }} kW⋅h</h2>
+                <h3>{{ abs($totalConsumption) }} m3</h3>
 
             </div>
 
@@ -158,7 +158,7 @@
                         <tbody>
                             <tr>
                                 <td>{{ $bestYear }}</td>
-                                <td>{{ $minConsumption }}</td>
+                                <td>{{ abs($minConsumption) }}</td>
                                 <td>kW⋅h</td>
                             </tr>
                         </tbody>

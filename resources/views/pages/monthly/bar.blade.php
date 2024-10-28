@@ -43,8 +43,7 @@
                 });
 
                 var values = sensorMeasurements.map(function(measurement) {
-                    return measurement
-                        .consumo_total;
+                    return measurement.consumo_total;
                 });
 
                 var ctxBar = document.getElementById('myBarChart').getContext('2d');

@@ -94,7 +94,7 @@
                             @foreach ($sortedResultados as $year => $consumption)
                                 <tr>
                                     <td>{{ $year }}:</td>
-                                    <td>{{ $consumption }}</td>
+                                    <td>{{ abs($consumption) }}</td> <!-- Asegura que el valor sea positivo -->
                                     <td>kW⋅h</td>
                                 </tr>
                             @endforeach

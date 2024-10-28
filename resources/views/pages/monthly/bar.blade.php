@@ -64,7 +64,7 @@
                         scales: {
                             y: {
                                 beginAtZero: true,
-                                max: 100000000
+                                max: 1000
                             }
                         }
                     }

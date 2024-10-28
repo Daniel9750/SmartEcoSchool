@@ -90,7 +90,7 @@
                             @foreach ($sortedResultados as $year => $consumption)
                                 <tr>
                                     <td>{{ $year }}:</td>
-                                    <td>{{ $consumption }}</td>
+                                    <td>{{ abs($consumption) }}</td>
                                     <td>m3</td>
                                 </tr>
                             @endforeach
